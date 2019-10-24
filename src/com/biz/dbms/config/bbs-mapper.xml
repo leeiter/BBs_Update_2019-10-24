@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.biz.dbms.dao.BBsDao">
+
+	<select id="selectAll" resultType="BBsDTO">
+		SELECT * FROM tbl_bbs
+		
+	</select>
+	<select id="findById" resultType="BBsDTO">
+		SELECT * FROM tbl_bbs WHERE bs_idpk = #{bs_idpk}
+	
+	</select>
+	<insert id="insert" parameterType="BBsDTO">
+		INSERT INTO tbl_bbs ( BS_IDPK,
+							BS_DATE,
+							BS_TIME,
+							BS_WRITER,
+							BS_SUBJECT,
+							BS_TEXT,
+							BS_COUNT )
+						VALUES( SEQ_BBS.NEXTVAL,
+							#{bs_date},
+							#{bs_time},
+							#{bs_writer},
+							#{bs_subject},
+							#{bs_text},
+							#{bs_count} )
+
+	</insert>
+	<update id="update" parameterType="BBsDTO">
+		UPDATE tbl_bbs SET
+			BS_WRITER = #{bs_writer},
+			BS_SUBJECT = #{bs_subject},
+			BS_TEXT = #{bs_text}
+		WHERE BS_IDPK = #{bs_idpk}
+	
+	</update>
+	<delete id="delete">
+		DELETE FROM tbl_bbs
+		WHERE bs_idpk = #{bs_idpk}
+	</delete>
+
+</mapper>
